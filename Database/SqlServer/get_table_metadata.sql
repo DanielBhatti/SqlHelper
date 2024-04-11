@@ -1,6 +1,8 @@
-﻿--alter procedure dbo.GetTableMetadata @table_schema varchar(255), @table_name varchar(255) as /*
-declare @table_schema varchar(255) = 'servicer'
-declare @table_name varchar(255) = 'PHH_M_REMIT_ESCROW_ADVANCES'
+--alter procedure dbo.GetTableMetadata @table_schema varchar(255), @table_name varchar(255) as /*
+declare @table_schema varchar(255) = 'msr'
+declare @table_name varchar(255) = 'BankActivity'
+
+
 declare @use_like_expression bit = 1
 
 --*/
@@ -150,7 +152,7 @@ create_statement = 'alter table ' + quotename(object_schema_name(parent_column.o
 drop_statement = 'alter table ' + quotename(object_schema_name(parent_column.object_id)) + '.' + quotename(object_name(parent_column.object_id)) + ' drop constraint ' + quotename(foreign_keys.name),
 rename_statement = 'exec sp_rename ' + quotename(quotename(object_schema_name(parent_column.object_id)) + '.' + quotename(foreign_keys.name), '''') + ', ''FK_' + object_name(parent_column.object_id) + '_' + object_name(referenced_column.object_id) + '''',
 reenable_statement = 'alter table ' + quotename(object_schema_name(parent_column.object_id)) + '.' + quotename(object_name(parent_column.object_id)) + ' with check check constraint ' + quotename(foreign_keys.name),
-disable_statement = 'alter table ' + quotename(object_schema_name(parent_column.object_id)) + '.' + quotename(object_name(parent_column.object_id)) + ' with nocheck check constraint ' + quotename(foreign_keys.name),
+disable_statement = 'alter table ' + quotename(object_schema_name(parent_column.object_id)) + '.' + quotename(object_name(parent_column.object_id)) + ' nocheck constraint ' + quotename(foreign_keys.name),
 is_obeying_constraint_statement = 'select ' + parent_column.name + ' from ' + QUOTENAME(object_schema_name(parent_column.object_id)) + '.' + QUOTENAME(object_name(parent_column.object_id)) + ' except ' + 'select ' + referenced_column.name + ' from ' + QUOTENAME(object_schema_name(referenced_column.object_id)) + '.' + QUOTENAME(object_name(referenced_column.object_id))
 from sys.foreign_keys
 inner join sys.foreign_key_columns parent_column_key on parent_column_key.parent_object_id = foreign_keys.parent_object_id and parent_column_key.constraint_object_id = foreign_keys.object_id
