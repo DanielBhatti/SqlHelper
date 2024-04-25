@@ -1,6 +1,6 @@
 --alter procedure dbo.GetTableMetadata @table_schema varchar(255), @table_name varchar(255) as /*
-declare @table_schema varchar(255) = 'msr'
-declare @table_name varchar(255) = 'BankActivity'
+declare @table_schema varchar(255) = 'smp'
+declare @table_name varchar(255) = 'MsrSettlementLoan'
 
 
 declare @use_like_expression bit = 1

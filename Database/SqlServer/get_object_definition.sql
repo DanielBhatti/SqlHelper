@@ -2,7 +2,7 @@
 -- note that if the routine definition spans more than 1 column, you'll have to remove whitespace when copying
 -- default setting will add a tab between column values
 declare @object_schema varchar(255) = ''
-declare @object_name varchar(255) = ''
+declare @object_name varchar(255) = 'vw_Msr'
 
 --- Don't modify anything beyond this line
 
