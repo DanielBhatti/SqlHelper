@@ -4,3 +4,4 @@ from sys.objects as so
 where so.type = 'v' 
 
 select @sql
+

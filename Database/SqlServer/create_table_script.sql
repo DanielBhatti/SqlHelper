@@ -1,5 +1,5 @@
-﻿declare @table_schema varchar(255) = 'servicer'
-declare @table_name varchar(255) = 'PHH_M_REMIT_ESCROW_ADVANCES'
+﻿declare @table_schema varchar(255) = 'msr'
+declare @table_name varchar(255) = 'RollforwardMonthEnd'
 
 -- statement is null if no primary key, fix later
 

@@ -1,4 +1,4 @@
-alter procedure dbo.sync_tables @source_schema_name varchar(100), @source_table_name varchar(100), @target_schema_name varchar(100) = null, @target_table_name varchar(100) = null, @linked_server_name varchar(100) = null, @linked_database_name varchar(100) = null, @where_clause varchar(1000) = null, @with_no_lock bit = 1, @is_executing bit = 1
+create or alter procedure dbo.sync_tables @source_schema_name varchar(100), @source_table_name varchar(100), @target_schema_name varchar(100) = null, @target_table_name varchar(100) = null, @linked_server_name varchar(100) = null, @linked_database_name varchar(100) = null, @where_clause varchar(1000) = null, @with_no_lock bit = 1, @is_executing bit = 1, @is_transaction bit = 0
 as
 begin
 
@@ -31,7 +31,8 @@ declare @has_identity_insert bit = (select count(*) from sys.columns where objec
 declare @sql nvarchar(max) = ''
 
 if @with_no_lock = 1 set @sql += 'set transaction isolation level read uncommitted' + char(13) + char(10)
-set @sql += 'set xact_abort on begin transaction' + char(13) + char(10)
+set @sql += 'set xact_abort on' + char(13) + char(10)
+if @is_transaction =1 set @sql += 'begin transaction' + CHAR(13) + CHAR(10)
 
 if @has_identity_insert = 1 set @sql += 'set identity_insert ' + @target_schema_name + '.' + @target_table_name + ' on'
 
@@ -79,7 +80,7 @@ from ' + @linked_server_name + '.' + @linked_database_name + '.' + @source_schem
 
 if @has_identity_insert = 1 set @sql += 'set identity_insert ' + @target_schema_name + '.' + @target_table_name + ' off'
 
-set @sql += char(13) + char(10) + 'commit'
+if @is_transaction = 1 set @sql += char(13) + char(10) + 'commit'
 
 if @is_executing = 1 exec(@sql)
 else select @sql

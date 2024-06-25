@@ -6,7 +6,7 @@
         ELSE SERVERPROPERTY('InstanceName')
     END AS InstanceName,
     '' as Port, --need to update to strip from Servername. Note: Assumes Registered Server is named with Port
-    SUBSTRING ( (SELECT @@VERSION),1, CHARINDEX('-',(SELECT @@VERSION))-1 ) as ProductName,
+    SUBSTRING ( (SELECT @@VERSION),1, CHARINDEX('-',(SELECT @@VERSION))-1 ) as ProductName,l
     SERVERPROPERTY('ProductVersion') AS ProductVersion,  
     SERVERPROPERTY('ProductLevel') AS ProductLevel,
     SERVERPROPERTY('ProductMajorVersion') AS ProductMajorVersion,

@@ -17,3 +17,4 @@ select
 *
 from f
 where schema_name in ('msr', 'sentinel', 'smp', 'dbo')
+and table_name like '%repurchaserequ%'

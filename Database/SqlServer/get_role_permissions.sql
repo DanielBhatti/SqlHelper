@@ -16,8 +16,7 @@ from sys.database_principals roleprinc
 left join sys.database_permissions perm on perm.grantee_principal_id = roleprinc.principal_id                
 left join sys.objects obj ON obj.object_id = perm.major_id
 )
-select
-*
+select distinct
+role_name
 from sql_roles
-where
-role_name like '%eaglewriter%'
+order by role_name

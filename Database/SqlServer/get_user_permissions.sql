@@ -153,7 +153,9 @@ ObjectName,
 ObjectSchema,
 ColumnName
 from all_user_permissions
---where Role = 'nlydb_TapeCracker'
-where ObjectName like '%snap%'
+where 1 = 1
+--and ObjectName like '%snap%'
+--and Role = 'nlydb_TapeCracker'
+and DatabaseUserName like '%PiculetDev%'
 order by
 UserName, DatabaseUserName, Role, ObjectType, ObjectSchema, ObjectName, PermissionType
